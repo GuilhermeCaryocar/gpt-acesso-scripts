@@ -1,0 +1,34 @@
+openapi: 3.0.1
+info:
+  title: GPT Drive API
+  description: API local para permitir ao GPT acessar e executar scripts PowerShell via Google Drive.
+  version: "1.0.0"
+servers:
+  - url: http://localhost:5000
+paths:
+  /executar-script:
+    post:
+      summary: Executa um script PowerShell armazenado no Google Drive.
+      operationId: executarScript
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome_arquivo:
+                  type: string
+                  description: Nome do arquivo .ps1 no Drive
+              required:
+                - nome_arquivo
+      responses:
+        '200':
+          description: Resultado da execução do script
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  saida:
+                    type: string
